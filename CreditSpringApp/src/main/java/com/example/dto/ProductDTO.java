@@ -5,6 +5,8 @@ public class ProductDTO {
 	private String productName;
 	private int value;
 	
+	public ProductDTO() {}
+	
 	public ProductDTO(String productName, int value) {
 		super();
 		this.productName = productName;

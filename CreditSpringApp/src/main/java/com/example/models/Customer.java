@@ -7,6 +7,16 @@ public class Customer {
 	private String surname;
 	private String pesel;
 	
+	public Customer() {}
+	
+	public Customer(int creditId, String firstName, String surname, String pesel) {
+		super();
+		this.creditId = creditId;
+		this.firstName = firstName;
+		this.surname = surname;
+		this.pesel = pesel;
+	}
+	
 	public int getCreditId() {
 		return creditId;
 	}

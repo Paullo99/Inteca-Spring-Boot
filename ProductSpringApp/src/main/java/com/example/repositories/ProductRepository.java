@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.dto.ProductDTO;
 import com.example.models.Product;
 
 @Repository
@@ -27,10 +26,10 @@ public class ProductRepository {
 		});
 	}
 	
-	public int createProduct(ProductDTO product) {
-		String sql = "INSERT INTO product(ProductName, Value) VALUES(?,?)";
+	public int createProduct(Product product) {
+		String sql = "INSERT INTO product(CreditID, ProductName, Value) VALUES(?,?,?)";
 		
-		return jdbcTemplate.update(sql, product.getProductName(), product.getValue());
+		return jdbcTemplate.update(sql, product.getCreditId(), product.getProductName(), product.getValue());
 	}
 
 }

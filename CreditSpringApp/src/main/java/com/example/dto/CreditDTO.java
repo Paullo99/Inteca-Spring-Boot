@@ -4,6 +4,8 @@ public class CreditDTO {
 
 	private String creditName;
 	
+	public CreditDTO() {}
+	
 	public CreditDTO(String creditName) {
 		super();
 		this.creditName = creditName;

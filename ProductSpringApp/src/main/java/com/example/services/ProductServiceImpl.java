@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.dto.ProductDTO;
 import com.example.models.Product;
 import com.example.repositories.ProductRepository;
 
@@ -21,9 +20,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int createProduct(Product product) {
-		return 0;
-		// TODO Auto-generated method stub
-		
+	public void createProduct(Product product) {
+		productRepository.createProduct(product);	
 	}
 }

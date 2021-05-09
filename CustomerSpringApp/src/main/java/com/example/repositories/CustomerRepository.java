@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.dto.CustomerDTO;
 import com.example.models.Customer;
 
 @Repository
@@ -28,10 +27,10 @@ public class CustomerRepository {
 		});
 	}
 	
-	public void createCustomer(CustomerDTO customer) {
-		String sql = "INSERT INTO Customer(FirstName, Surname, Pesel) VALUES(?,?,?)";
+	public void createCustomer(Customer customer) {
+		String sql = "INSERT INTO Customer(CreditID, FirstName, Surname, Pesel) VALUES(?,?,?,?)";
 		
-		jdbcTemplate.update(sql, customer.getFirstName(), customer.getSurname(), customer.getPesel());
+		jdbcTemplate.update(sql, customer.getCreditId(), customer.getFirstName(), customer.getSurname(), customer.getPesel());
 	}
 
 }

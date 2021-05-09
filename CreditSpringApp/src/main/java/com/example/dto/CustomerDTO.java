@@ -6,6 +6,8 @@ public class CustomerDTO {
 	private String surname;
 	private String pesel;
 	
+	public CustomerDTO() {}
+	
 	public CustomerDTO(String firstName, String surname, String pesel) {
 		super();
 		this.firstName = firstName;

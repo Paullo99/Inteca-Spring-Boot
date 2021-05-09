@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -64,6 +65,21 @@ public class CreditController {
 		return output;
 	}
 
+	@PostMapping(path = "/createCredit")
+	@ResponseBody
+	public HashMap<String, Integer> createCredit(@RequestBody CombinedObject combinedObject) {
+		HashMap<String, Integer> hashMap = new HashMap<>();
+		int id =  creditService.createCredit(new CreditDTO(combinedObject.getCredit().getCreditName()));
+		
+		Product product = new Product(id, combinedObject.getProduct().getProductName(), combinedObject.getProduct().getValue());
+		restTemplate.postForObject("http://localhost:8180/createProduct", product, Product.class);
+		
+		Customer customer = new Customer(id, combinedObject.getCustomer().getFirstName(), combinedObject.getCustomer().getSurname(), combinedObject.getCustomer().getPesel());
+		restTemplate.postForObject("http://localhost:8280/createCustomer", customer, Customer.class);
+		hashMap.put("ID", id);
+		return hashMap;
+	}
+	
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();

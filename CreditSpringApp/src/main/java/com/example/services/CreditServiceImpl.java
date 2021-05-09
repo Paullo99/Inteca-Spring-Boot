@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+
+import com.example.dto.CreditDTO;
 import com.example.models.Credit;
 import com.example.repositories.CreditRepository;
 
@@ -17,6 +19,11 @@ public class CreditServiceImpl implements CreditService {
 	@Override
 	public List<Credit> getAllCredits() {
 		return creditRepository.getAllCredits();
+	}
+
+	@Override
+	public Integer createCredit(CreditDTO credit) {
+		return creditRepository.createCredit(credit);
 	}
 
 }
