@@ -39,23 +39,26 @@ public class CreditController {
 	@ResponseBody
 	public List<CombinedObject> getCredits() {
 
-		// Pobranie wszystkich customers oraz produktów z endpointów
+		// Pobranie wszystkich klientów oraz produktów z endpointów
 		ResponseEntity<Customer[]> responseEntityCustomers = restTemplate
 				.getForEntity("http://localhost:8280/customers", Customer[].class);
 		ResponseEntity<Product[]> responseEntityProducts = restTemplate.getForEntity("http://localhost:8180/products",
 				Product[].class);
 
+		//Mapa: klucz(CreditID) i wartość (CustomerDTO)
 		Map<Integer, CustomerDTO> customersMap = Arrays.stream(responseEntityCustomers.getBody()).collect(Collectors
 				.toMap(Customer::getCreditId, c -> new CustomerDTO(c.getFirstName(), c.getSurname(), c.getPesel())));
-
+		
+		//Mapa: klucz(CreditID) i wartość (ProductDTO)
 		Map<Integer, ProductDTO> productsMap = Arrays.stream(responseEntityProducts.getBody()).collect(Collectors
 				.toMap(Product::getCreditId, p -> new ProductDTO(p.getProductName(), p.getValue())));
 
 		List<Credit> credits = creditService.getAllCredits();
 		List<CombinedObject> output = new ArrayList<>();
-		CombinedObject combinedObjectTemp = new CombinedObject();
+		CombinedObject combinedObjectTemp;
 
 		for (Credit credit : credits) {
+			combinedObjectTemp = new CombinedObject();
 			combinedObjectTemp.setCustomer(customersMap.get(credit.getId()));
 			combinedObjectTemp.setProduct(productsMap.get(credit.getId()));
 			combinedObjectTemp.setCredit(new CreditDTO(credit.getCreditName()));
