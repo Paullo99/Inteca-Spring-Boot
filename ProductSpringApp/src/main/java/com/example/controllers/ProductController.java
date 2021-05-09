@@ -8,19 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.dto.ProductDTO;
-import com.example.repositories.ProductRepository;
+import com.example.models.Product;
+import com.example.services.ProductService;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
-	ProductRepository productRepository;
+	ProductService productService;
 	
 	@GetMapping(path = "/products")
 	@ResponseBody
-	public List<ProductDTO> getProducts(){
+	public List<Product> getProducts(){
 		
-		List<ProductDTO> products = productRepository.getAllProducts();
+		List<Product> products = productService.getAllProducts();
 
 		return products;
 	}
@@ -33,7 +34,7 @@ public class ProductController {
 		product.setProductName("XDF");
 		product.setValue(120203);
 		
-		productRepository.createProduct(product);
+		//productService.createProduct(product);
 	}
 
 }

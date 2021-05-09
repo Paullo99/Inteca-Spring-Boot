@@ -1,10 +1,19 @@
-package com.example.dto;
+package com.example.models;
 
-public class ProductDTO {
+public class Product {
 	
+	private int creditId;
 	private String productName;
 	private int value;
 	
+	public int getCreditId() {
+		return creditId;
+	}
+
+	public void setCreditId(int creditId) {
+		this.creditId = creditId;
+	}
+
 	public String getProductName() {
 		return productName;
 	}
@@ -20,4 +29,7 @@ public class ProductDTO {
 	public void setValue(int value) {
 		this.value = value;
 	}
+	
+	
+
 }

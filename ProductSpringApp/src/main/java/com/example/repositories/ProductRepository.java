@@ -15,21 +15,22 @@ public class ProductRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public List<ProductDTO> getAllProducts(){
-		String sql = "SELECT CreditID, ProductName, Value FROM Product";
+	public List<Product> getAllProducts(){
+		String sql = "SELECT CreditID, ProductName, Value FROM product";
 
 		return jdbcTemplate.query(sql, (resultSet, rowNum) -> {
-			ProductDTO product = new ProductDTO();
+			Product product = new Product();
+			product.setCreditId(resultSet.getInt("CreditID"));
 			product.setProductName(resultSet.getString("ProductName"));
 			product.setValue(resultSet.getInt("Value"));
 			return product;
 		});
 	}
 	
-	public void createProduct(ProductDTO product) {
-		String sql = "INSERT INTO Product(ProductName, Value) VALUES(?,?)";
+	public int createProduct(ProductDTO product) {
+		String sql = "INSERT INTO product(ProductName, Value) VALUES(?,?)";
 		
-		jdbcTemplate.update(sql, product.getProductName(), product.getValue());
+		return jdbcTemplate.update(sql, product.getProductName(), product.getValue());
 	}
 
 }

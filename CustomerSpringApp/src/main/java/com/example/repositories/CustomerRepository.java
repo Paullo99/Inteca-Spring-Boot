@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.dto.CustomerDTO;
+import com.example.models.Customer;
 
 @Repository
 public class CustomerRepository {
@@ -14,11 +15,12 @@ public class CustomerRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public List<CustomerDTO> getAllCustomers(){
-		String sql = "SELECT FirstName, Surname, Pesel FROM Customer";
+	public List<Customer> getAllCustomers(){
+		String sql = "SELECT CreditID, FirstName, Surname, Pesel FROM Customer";
 
 		return jdbcTemplate.query(sql, (resultSet, rowNum) -> {
-			CustomerDTO customer = new CustomerDTO();
+			Customer customer = new Customer();
+			customer.setCreditId(resultSet.getInt("CreditId"));
 			customer.setFirstName(resultSet.getString("FirstName"));
 			customer.setSurname(resultSet.getString("Surname"));
 			customer.setPesel(resultSet.getString("Pesel"));

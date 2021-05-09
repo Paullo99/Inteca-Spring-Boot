@@ -1,10 +1,16 @@
 package com.example.dto;
 
 public class ProductDTO {
-	
+
 	private String productName;
 	private int value;
 	
+	public ProductDTO(String productName, int value) {
+		super();
+		this.productName = productName;
+		this.value = value;
+	}
+
 	public String getProductName() {
 		return productName;
 	}
@@ -20,4 +26,5 @@ public class ProductDTO {
 	public void setValue(int value) {
 		this.value = value;
 	}
+		
 }

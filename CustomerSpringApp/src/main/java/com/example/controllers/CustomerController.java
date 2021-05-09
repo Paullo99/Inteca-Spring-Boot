@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.dto.CustomerDTO;
+import com.example.models.Customer;
 import com.example.repositories.CustomerRepository;
+import com.example.services.CustomerService;
 
 @Controller
 public class CustomerController {
 	
 	@Autowired
-	CustomerRepository customerRepository;
+	CustomerService customerService;
 	
 	@GetMapping(path = "/customers")
 	@ResponseBody
-	public List<CustomerDTO> getCustomers(){
-		
-		List<CustomerDTO> customers = customerRepository.getAllCustomers();
+	public List<Customer> getCustomers(){
 
-		return customers;
+		return customerService.getAllCustomers();
 	}
 	
 	@GetMapping(path = "/create-customer")
@@ -34,7 +34,7 @@ public class CustomerController {
 		customer.setSurname("Przykład");
 		customer.setPesel("94213921439214");
 		
-		customerRepository.createCustomer(customer);
+		//customerRepository.createCustomer(customer);
 	}
 
 }
