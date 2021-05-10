@@ -1,0 +1,32 @@
+version: "3"
+services:
+   mysql-database:
+      container_name: 'mysql_db'
+      image: mysql:latest
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_USER: root
+      ports:
+        - "3307:3306"
+
+   customer:
+      build: ./CustomerSpringApp
+      ports:
+        - "8280:8280"
+      depends_on:
+       - mysql-database
+
+   product:
+      build: ./ProductSpringApp
+      ports:
+       - "8180:8180"
+      depends_on:
+       - mysql-database
+   credit:
+      build: ./CreditSpringApp
+      ports:
+       - "8080:8080"
+      depends_on:
+       - customer
+       - product
+       - mysql-database

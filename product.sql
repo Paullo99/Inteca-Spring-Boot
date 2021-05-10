@@ -10,7 +10,7 @@ CREATE TABLE `Product` (
 ) AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `Product` VALUES
-(1, 'Ex1', 100000),
-(2, 'Ex2', 500000),
-(3, 'Ex3', 300000),
-(4, 'Ex4', 450000);
+(1, 'Zegarek złoty', 100000),
+(2, 'Dom', 500000),
+(3, 'Samochód', 300000),
+(4, 'Domek w górachcustomer', 450000);
